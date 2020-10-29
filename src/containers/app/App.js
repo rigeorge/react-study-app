@@ -3,6 +3,7 @@ import Popup from "../../components/models/Popup";
 import './App.css';
 import InputText from '../../components/inputText/InputText';
 import Button from '../../components/button/Button';
+import Login from "../../containers/login/login";
 
 export default class App extends React.Component {
   constructor() {
@@ -83,6 +84,7 @@ export default class App extends React.Component {
           togglePopup={this.togglePopup}
           removeItem={this.removeItem}
         />
+        <Login/>
       </div>
     );
   }
