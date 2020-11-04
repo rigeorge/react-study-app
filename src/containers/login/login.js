@@ -16,17 +16,15 @@ export default class Login extends React.Component {
             password: {
                 value: "",
                 error: ""
-            }
+            },
+            showloginDetails: false
 
         };
         this.handleOnChange = this.handleOnChange.bind(this);
-        this.handleClickEvent = this.handleClickEvent.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
    
     handleOnChange(e) {
-        //const value = e.target.value;
-        //this.setState({ [e.target.name]: value });
-        //let fields = this.state.fields;
         const name = e.target.name;
         const value = e.target.value;
         let error ="";
@@ -37,16 +35,13 @@ export default class Login extends React.Component {
                     error = "*Please enter your username.";
                   }
                   break;
-            
-               case "password":   
-              
-                  if (value.length < 1) {
-                    
+            case "password":   
+                  if (value.length < 1) { 
                     error ="*Please enter your password.";
                   } 
                  break;
 
-                 default :
+             default :
                  break;
               }
        const fieldname = this.state[name]
@@ -56,27 +51,21 @@ export default class Login extends React.Component {
         this.setState({
             fieldname: fieldname
         });
+      }
+
+      handleSubmit(e) {
+        alert("Hiii");
+        e.preventDefault();
+        this.setState({showloginDetails : true})
         console.log(this.state);
 
-      }
-
-      handleClickEvent(e) {
-        alert("hii");
-        if (this.validateForm()) {
-            let fields = {};
-            fields["username"] = "";
-            fields["password"] = "";
-            this.setState({fields:fields});
-            alert("Form submitted");
-        }
-      }
-
-     
+      }    
 
     render(){
     
         return(
             <div>
+                <form onSubmit={this.handleSubmit}>
                 <div>
                 <label>User Name</label>
                 <input type="text" name="username" value={this.state.username.value} onChange={this.handleOnChange}/>
@@ -88,8 +77,13 @@ export default class Login extends React.Component {
                 <div className="errorMsg">{this.state.password.error}</div>
                 </div>
                 <div>
-                <button onclick={this.handleClickEvent}>Login</button>
+                <button type="submit">Login</button>
+                
                 </div>
+                </form>
+                {this.state.showloginDetails && 
+                <p>{this.state.username.value}</p>
+                }
             </div>
         )
     }
